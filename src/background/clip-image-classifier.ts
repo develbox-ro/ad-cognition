@@ -30,16 +30,20 @@ export class ClipImageClassifier {
 
     static async isServerAccessible(url: string) {
         try {
-            await fetch(url, { method: 'HEAD' });
+            const response = await fetch(url + "/health", { method: 'GET' });
+            if (response.status >= 300) {
+                return false;
+            }
+
             return true;
         } catch (error) {
-            return false;
+            log.error('Error checking server health:', error);
         }
     }
 
     public static async isAvailable() {
-        const response = await ClipImageClassifier.isServerAccessible(settings.getSetting(SETTINGS_NAMES.CLIP_PROTECTION_SERVER))
-        return response;
+        const isAvailable = await ClipImageClassifier.isServerAccessible(settings.getSetting(SETTINGS_NAMES.CLIP_PROTECTION_SERVER))
+        return isAvailable;
     }
 
     public static async analyzeImage(src: string): Promise<number | null> {
