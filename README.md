@@ -1,5 +1,5 @@
 # Ad Cognition
-
+[Chrome Web Store Listing](https://chromewebstore.google.com/detail/adcognition/kdogkcgffhnfpbjhpmdmepddapmocbao?pli=1)
 ## How to build
 
 ## Requirements
